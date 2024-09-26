@@ -52,16 +52,16 @@
       ]
     },
     {
-      "name": "harb",
-      "srcPath": "./harb",
-      "targets": [
-        {
-          "name": "default",
-          "applyToProducts": [
-            "default"
-          ]
-        }
-      ]
+      "name": "harB",
+      "srcPath": "./harB",
+    },
+    {
+      "name": "LeafRouter",
+      "srcPath": "./LeafRouter",
+    },
+    {
+      "name": "harA",
+      "srcPath": "./harA",
     }
   ]
 }

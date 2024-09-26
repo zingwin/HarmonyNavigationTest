@@ -1,14 +1,12 @@
 {
-  "name": "entry",
+  "name": "harb",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
-  "main": "",
+  "main": "Index.ets",
   "author": "",
-  "license": "",
+  "license": "Apache-2.0",
   "dependencies": {
-    "leafrouter": "file:../LeafRouter",
-    "harb": "file:../harB",
-    "hara": "file:../harA"
+    "leafrouter": "file:../LeafRouter"
   },
   "devDependencies": {},
   "dynamicDependencies": {}

@@ -1,64 +1,89 @@
 
 
 
-import { BuilderNameConstants, buildRouterModel, RouterModule, RouterNameConstants } from '../router/RouterIndex';
+import { BuilderNameConstants, buildRouterModel, RouterModel, RouterModule } from 'leafrouter';
+import { ListPage } from '../components/listPage';
+import { pageOneTmp } from '../components/pageOneTmp';
+import { pageTwoTmp } from '../components/pageTwoTmp';
 
 @Entry
 @Component
 struct EntryHap {
-  @State entryHapRouter: NavPathStack = new NavPathStack();
-
-  aboutToAppear() {
-    if (!this.entryHapRouter) {
-      this.entryHapRouter = new NavPathStack();
-    }
-    RouterModule.createRouter(RouterNameConstants.ENTRY_HAP, this.entryHapRouter);
-  };
-
   @Builder
   routerMap(builderName: string, param: object) {
-    RouterModule.getBuilder(builderName).builder(param);
+    if(builderName == "entry_listpage"){
+      ListPage();
+    }else{
+      RouterModule.getBuilder(builderName).builder(param);
+    }
   };
 
   build() {
-    Navigation(this.entryHapRouter) {
+    Navigation(RouterModule.router) {
+      Button("to entery entry_listpage", { stateEffect: true, type: ButtonType.Capsule })
+        .width('80%')
+        .height(40)
+        .margin(20)
+        .onClick(() => {
+          RouterModule.router.pushPath({name:"entry_listpage"});
+        })
       Button("to A1", { stateEffect: true, type: ButtonType.Capsule })
         .width('80%')
         .height(40)
         .margin(20)
         .onClick(() => {
-          buildRouterModel(RouterNameConstants.ENTRY_HAP, "../pages/A1_A1", new Object({
-            origin: 'Entry',
-            postId: "122132323"
-          }));
+          let routerModel: RouterModel = {
+            harName: "hara",
+            pageName:BuilderNameConstants.HARA_A1,
+            param:new Object({
+              origin: 'Entry',
+              postId: "4323rsdafsdfasdf"
+            })
+          };
+          RouterModule.push(routerModel);
         })
       Button("to A2", { stateEffect: true, type: ButtonType.Capsule })
         .width('80%')
         .height(40)
         .margin(20)
         .onClick(() => {
-          buildRouterModel(RouterNameConstants.ENTRY_HAP, "../pages/A2_A2", new Object({
+          buildRouterModel("hara", BuilderNameConstants.HARA_A2, new Object({
             origin: 'Entry',
             postId: "4323rsdafsdfasdf"
           }));
         })
+      Button("to B1", { stateEffect: true, type: ButtonType.Capsule })
+        .width('80%')
+        .height(40)
+        .margin(20)
+        .onClick(() => {
+          let routerModel: RouterModel = {
+            harName: "harb",
+            pageName:BuilderNameConstants.HARB_B1,
+            param:new Object({
+              origin: 'Entry',
+              postId: "4323rsdafsdfasdf"
+            })
+          };
+          RouterModule.push(routerModel);
+        })
+      Button("to B2", { stateEffect: true, type: ButtonType.Capsule })
+        .width('80%')
+        .height(40)
+        .margin(20)
+        .onClick(() => {
+          let routerModel: RouterModel = {
+            harName: "harb",
+            pageName:BuilderNameConstants.HARB_B2,
+            param:new Object({
+              origin: 'Entry',
+              postId: "4323rsdafsdfasdf"
+            })
+          };
+          RouterModule.push(routerModel);
+        })
     }
     .title('NavIndex')
     .navDestination(this.routerMap);
-  }
-}
-
-
-export function harInit(builderName: string): void {
-  // 动态引入要跳转的页面
-  switch (builderName) {
-    case BuilderNameConstants.A1Page:
-      import("./A1");
-      break;
-    case BuilderNameConstants.A2Page:
-      import("./A2");
-      break;
-    default:
-      break;
   }
 }
